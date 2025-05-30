@@ -1,3 +1,92 @@
+# Healthcare Shift Scheduler
+
+A modern web application for managing healthcare worker shifts and schedules efficiently.
+
+## Tech Stack
+
+- **React 18**: Modern UI library for building user interfaces
+- **Redux Toolkit**: State management with simplified Redux configuration
+- **React Router DOM**: Navigation and routing
+- **Bootstrap**: Responsive UI components and styling
+- **Axios**: HTTP client for API requests
+
+## Features
+
+- User authentication and authorization
+- Shift management and scheduling
+- Calendar view of schedules
+- Staff management
+- Real-time updates
+- Responsive design for mobile and desktop
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18 or higher
+- npm (comes with Node.js)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd healthcare-shift-scheduler
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm start
+```
+
+The application will be available at http://localhost:3000 (or another port if 3000 is in use)
+
+## Available Scripts
+
+- `npm start`: Run the development server
+- `npm test`: Run tests
+- `npm run build`: Create production build
+- `npm run eject`: Eject from Create React App (one-way operation)
+
+## Project Structure
+
+```
+healthcare-shift-scheduler/
+├── src/
+│   ├── app/              # Application setup, store configuration
+│   ├── components/       # Reusable components
+│   ├── features/         # Feature-based modules
+│   ├── pages/           # Page components
+│   ├── services/        # API services
+│   ├── utils/           # Utility functions
+│   └── styles/          # Global styles
+├── public/              # Static files
+└── package.json         # Project dependencies and scripts
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, please open an issue in the repository or contact the development team.
+
+---
+
 # Squad - 11 Staff Shift Management System
 
 ## High-Level Goals
@@ -84,7 +173,7 @@
 **Features:**  
 - Admin marks attendance during or after shift  
 - Options: Present, Absent  
-- Remarks field (e.g., “Sick Leave”)  
+- Remarks field (e.g., "Sick Leave")  
 - Time-restricted update window (e.g., within 1 hour after shift ends)  
 
 **Backend APIs:**  
