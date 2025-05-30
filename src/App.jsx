@@ -14,6 +14,7 @@ import StaffManagement from './pages/StaffManagement';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+  console.log("Auto Deployed");
   return (
     <Provider store={store}>
       <Router>

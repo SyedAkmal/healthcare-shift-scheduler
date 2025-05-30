@@ -1,0 +1,15 @@
+name: Deploy Frontend to Render
+
+on:
+  push:
+    branches:
+      - master  # Change if using a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render Frontend Deploy Hook
+        run: curl "$RENDER_FRONTEND_DEPLOY_HOOK"
+        env:
+          RENDER_FRONTEND_DEPLOY_HOOK: ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
