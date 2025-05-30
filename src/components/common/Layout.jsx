@@ -12,14 +12,13 @@ const Layout = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.ui);
   const { sidebarOpen } = useSelector((state) => state.ui);
-  const { theme } = useSelector((state) => state.ui);
 
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar());
   };
 
   return (
-    <div className={`app-container ${theme}`} data-theme={theme}>
+    <div className="app-container">
       <Header onToggleSidebar={handleToggleSidebar} />
       <div className="d-flex">
         <Sidebar isOpen={sidebarOpen} />
@@ -38,11 +37,12 @@ const Layout = () => {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
+          background-color: #f8f9fa;
         }
 
         .main-content {
           flex: 1;
-          transition: margin-left var(--transition-speed) var(--transition-ease);
+          transition: margin-left 0.3s ease-in-out;
           position: relative;
         }
 
