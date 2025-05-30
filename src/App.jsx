@@ -27,6 +27,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/globals.css';
 
 const App = () => {
+  console.log("Auto Deployed");
   return (
     <>
       <Router>
