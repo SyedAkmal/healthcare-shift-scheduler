@@ -1,17 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import staffReducer from './slices/staffSlice';
-// import shiftReducer from './slices/shiftSlice';
+import shiftReducer from './slices/shiftSlice';
 // import attendanceReducer from './slices/attendanceSlice';
 import uiReducer from './slices/uiSlice';
+import calendarReducer from './slices/calendarSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     staff: staffReducer,
-    // shift: shiftReducer,
+    shifts: shiftReducer,
     // attendance: attendanceReducer,
     ui: uiReducer,
+    calendar: calendarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

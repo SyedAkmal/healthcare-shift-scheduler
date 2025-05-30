@@ -16,7 +16,6 @@ import { showNotification } from '../store/slices/uiSlice';
 const StaffManagement = () => {
   const dispatch = useDispatch();
   const {
-    loading,
     error,
     filters,
     sorting,
@@ -40,7 +39,7 @@ const StaffManagement = () => {
       limit: pagination.itemsPerPage
     };
     dispatch(fetchStaff(params));
-  }, [dispatch, filters, sorting, pagination.currentPage]);
+  }, [dispatch, filters, sorting, pagination.currentPage, pagination.itemsPerPage]);
 
   const handleAddStaff = () => {
     dispatch(setModalMode('add'));

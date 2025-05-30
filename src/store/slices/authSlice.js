@@ -9,6 +9,20 @@ const initialState = {
   error: null,
 };
 
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async (profileData, { rejectWithValue }) => {
+    try {
+      // TODO: Replace with actual API call when backend is ready
+      const updatedUser = { ...profileData };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      return updatedUser;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
@@ -80,6 +94,19 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
         state.isAuthenticated = false;
+      })
+      .addCase(updateProfile.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });

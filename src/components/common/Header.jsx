@@ -2,23 +2,17 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../store/slices/authSlice';
-import { toggleTheme } from '../../store/slices/uiSlice';
-import { FaBars, FaSun, FaMoon, FaUser } from 'react-icons/fa';
+import { FaBars, FaUser } from 'react-icons/fa';
 
 const Header = ({ onToggleSidebar }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { theme } = useSelector((state) => state.ui);
 
   const handleLogout = () => {
     dispatch(logout()).then(() => {
       navigate('/login');
     });
-  };
-
-  const handleThemeToggle = () => {
-    dispatch(toggleTheme());
   };
 
   return (
@@ -37,14 +31,6 @@ const Header = ({ onToggleSidebar }) => {
         </Link>
 
         <div className="ms-auto d-flex align-items-center">
-          <button
-            className="btn btn-link theme-toggle me-3"
-            onClick={handleThemeToggle}
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-          >
-            {theme === 'light' ? <FaMoon /> : <FaSun />}
-          </button>
-
           <div className="dropdown">
             <button
               className="btn btn-link dropdown-toggle"
@@ -77,42 +63,42 @@ const Header = ({ onToggleSidebar }) => {
 
       <style jsx>{`
         .navbar {
-          background-color: var(--background);
-          border-bottom: 1px solid var(--border);
+          background-color: #ffffff;
+          border-bottom: 1px solid #dee2e6;
           padding: 0.5rem 1rem;
           z-index: 1000;
         }
 
         .navbar-brand {
-          color: var(--text);
+          color: #212529;
           font-weight: 600;
           text-decoration: none;
         }
 
         .btn-link {
-          color: var(--text);
+          color: #212529;
           text-decoration: none;
         }
 
         .btn-link:hover {
-          color: var(--primary);
+          color: #0d6efd;
         }
 
         .dropdown-menu {
-          background-color: var(--background);
-          border-color: var(--border);
+          background-color: #ffffff;
+          border-color: #dee2e6;
         }
 
         .dropdown-item {
-          color: var(--text);
+          color: #212529;
         }
 
         .dropdown-item:hover {
-          background-color: var(--hover);
+          background-color: #f8f9fa;
         }
 
         .dropdown-divider {
-          border-color: var(--border);
+          border-color: #dee2e6;
         }
       `}</style>
     </header>

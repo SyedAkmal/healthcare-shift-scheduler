@@ -15,7 +15,6 @@ const initialState = {
     editShift: false,
     markAttendance: false,
   },
-  theme: 'light',
   sidebarOpen: true,
 };
 
@@ -44,9 +43,6 @@ const uiSlice = createSlice({
       const modalName = action.payload;
       state.modals[modalName] = !state.modals[modalName];
     },
-    toggleTheme: (state) => {
-      state.theme = state.theme === 'light' ? 'dark' : 'light';
-    },
     toggleSidebar: (state) => {
       state.sidebarOpen = !state.sidebarOpen;
     },
@@ -58,7 +54,6 @@ export const {
   showNotification,
   hideNotification,
   toggleModal,
-  toggleTheme,
   toggleSidebar,
 } = uiSlice.actions;
 

@@ -14,12 +14,11 @@ const StaffFilters = () => {
   } = useSelector((state) => state.staff);
 
   // Debounced search handler
-  const debouncedSearch = useCallback(
-    debounce((value) => {
-      dispatch(setFilters({ search: value }));
-    }, 300),
-    [dispatch]
-  );
+  const debouncedSearch = useCallback((value) => {
+    debounce((searchValue) => {
+      dispatch(setFilters({ search: searchValue }));
+    }, 300)(value);
+  }, [dispatch]);
 
   const handleSearchChange = (e) => {
     debouncedSearch(e.target.value);
