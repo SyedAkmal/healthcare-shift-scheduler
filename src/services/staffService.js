@@ -1,55 +1,126 @@
-import api from './api';
+import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
-const staffService = {
-  // Get all staff members with optional filters
-  getAllStaff: async (filters = {}) => {
-    const response = await api.get('/staff', { params: filters });
-    return response.data;
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
   },
+});
 
-  // Get a single staff member by ID
-  getStaffById: async (id) => {
-    const response = await api.get(`/staff/${id}`);
-    return response.data;
+// Add request interceptor to add token to requests
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-  // Create a new staff member
-  createStaff: async (staffData) => {
-    const response = await api.post('/staff', staffData);
-    return response.data;
-  },
-
-  // Update a staff member
-  updateStaff: async (id, staffData) => {
-    const response = await api.put(`/staff/${id}`, staffData);
-    return response.data;
-  },
-
-  // Delete a staff member
-  deleteStaff: async (id) => {
-    const response = await api.delete(`/staff/${id}`);
-    return response.data;
-  },
-
-  // Bulk delete staff members
-  bulkDeleteStaff: async (ids) => {
-    const response = await api.post('/staff/bulk-delete', { ids });
-    return response.data;
-  },
-
-  // Search staff members
-  searchStaff: async (query) => {
-    const response = await api.get('/staff/search', { params: { query } });
-    return response.data;
-  },
-
-  // Get staff availability for a date range
-  getStaffAvailability: async (startDate, endDate) => {
-    const response = await api.get('/staff/availability', {
-      params: { startDate, endDate },
+// Get all staff members with optional filters
+export const getAllStaff = async (params) => {
+  try {
+    const { page = 1, limit = 10, search = '', role = '', department = '', sort = 'name', order = 'asc' } = params;
+    const response = await axiosInstance.get('/api/staff', {
+      params: {
+        page,
+        limit,
+        search,
+        role,
+        department,
+        sort,
+        order
+      }
     });
     return response.data;
-  },
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to fetch staff list';
+  }
 };
 
-export default staffService; 
+// Get a single staff member by ID
+export const getStaffById = async (id) => {
+  try {
+    const response = await axiosInstance.get(`/api/staff/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to fetch staff member';
+  }
+};
+
+// Create a new staff member
+export const createStaff = async (staffData) => {
+  try {
+    const response = await axiosInstance.post('/api/staff', staffData);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to create staff member';
+  }
+};
+
+// Update a staff member
+export const updateStaff = async (id, staffData) => {
+  try {
+    const response = await axiosInstance.put(`/api/staff/${id}`, staffData);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to update staff member';
+  }
+};
+
+// Delete a staff member
+export const deleteStaff = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/api/staff/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to delete staff member';
+  }
+};
+
+// Bulk delete staff members
+export const bulkDeleteStaff = async (ids) => {
+  try {
+    const response = await axiosInstance.delete('/api/staff/bulk', { data: { ids } });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to delete staff members';
+  }
+};
+
+// Search staff members
+export const searchStaff = async (query) => {
+  const response = await axiosInstance.get('/api/staff/search', { params: { query } });
+  return response.data;
+};
+
+// Get staff availability for a date range
+export const getStaffAvailability = async (startDate, endDate) => {
+  const response = await axiosInstance.get('/api/staff/availability', {
+    params: { startDate, endDate },
+  });
+  return response.data;
+};
+
+export const getRoles = async () => {
+  try {
+    const response = await axiosInstance.get('/api/staff/roles');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to fetch roles';
+  }
+};
+
+export const getDepartments = async () => {
+  try {
+    const response = await axiosInstance.get('/api/staff/departments');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to fetch departments';
+  }
+}; 

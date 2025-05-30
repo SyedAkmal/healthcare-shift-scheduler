@@ -23,7 +23,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      navigate('/staff');
     }
   }, [isAuthenticated, navigate]);
 
@@ -36,7 +36,7 @@ const Login = () => {
           message: 'Login successful! Welcome back.',
         })
       );
-      navigate('/dashboard');
+      navigate('/staff');
     } catch (error) {
       dispatch(
         showNotification({
