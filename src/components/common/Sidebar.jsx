@@ -11,6 +11,7 @@ import {
 
 const Sidebar = ({ isOpen }) => {
   const { user } = useSelector((state) => state.auth);
+  
 
   const menuItems = [
     // { path: '/dashboard', icon: <FaHome />, label: 'Dashboard' },
@@ -25,7 +26,7 @@ const Sidebar = ({ isOpen }) => {
   }
 
   return (
-    <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+    <aside className={`sidebar ${!isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
         {/* <div className="app-brand">
           Healthcare

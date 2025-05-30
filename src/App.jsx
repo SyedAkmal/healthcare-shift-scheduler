@@ -11,7 +11,7 @@ import PrivateRoute from './components/auth/PrivateRoute';
 import Login from './components/auth/Login';
 
 // Main Pages
-import Dashboard from './pages/Dashboard';
+// import Dashboard from './pages/Dashboard';
 import StaffManagement from './pages/StaffManagement';
 import ShiftScheduler from './pages/ShiftScheduler';
 import CalendarPage from './pages/CalendarPage';
@@ -36,9 +36,9 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           
           {/* Protected Routes */}
-          <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
+          <Route >
             {/* Main Routes */}
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             <Route path="/staff" element={<StaffManagement />} />
             <Route path="/shifts" element={<ShiftScheduler />} />
             <Route path="/calendar" element={<CalendarPage />} />
